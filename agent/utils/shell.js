@@ -18,7 +18,7 @@ function findPm2() {
     'pm2',
   ];
   // Return first candidate - in production validate with fs.existsSync
-  return candidates[1]; // /usr/local/bin/pm2 is most common
+  return candidates[0]; // /usr/local/bin/pm2 is most common
 }
 
 /**
@@ -31,7 +31,7 @@ function findPm2() {
 function safeExec(cmd, args = [], options = {}) {
   return new Promise((resolve, reject) => {
     // Validate each arg - no shell metacharacters
-    const safeArgRegex = /^[a-zA-Z0-9_\-\.\/\:@=,]+$/;
+    const safeArgRegex = /^[a-zA-Z0-9_\-\.\/\:@=,\?%&]+$/;
     for (const arg of args) {
       if (typeof arg !== 'string' || !safeArgRegex.test(arg)) {
         return reject(new Error(`Unsafe argument detected: "${arg}"`));
