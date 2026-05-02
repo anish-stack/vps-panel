@@ -11,10 +11,11 @@ const COMMAND_WHITELIST = {
 // Try to find pm2 in common locations
 function findPm2() {
   const candidates = [
+    '/root/.nvm/versions/node/v20.20.0/bin/pm2',
     '/usr/bin/pm2',
     '/usr/local/bin/pm2',
     '/usr/lib/node_modules/.bin/pm2',
-    'pm2', // PATH fallback
+    'pm2',
   ];
   // Return first candidate - in production validate with fs.existsSync
   return candidates[1]; // /usr/local/bin/pm2 is most common

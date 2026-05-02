@@ -13,10 +13,12 @@ function validateAppName(name) {
 const listApps = async (req, res) => {
   try {
     const { stdout } = await safeExec('pm2', ['jlist']);
+    console.log("stdout")
     let apps = [];
 
     try {
       const raw = JSON.parse(stdout);
+      console.log(raw)
       apps = raw.map(app => ({
         pid: app.pid,
         name: app.name,

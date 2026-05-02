@@ -59,6 +59,7 @@ export default function ServerDetailPage() {
     queryFn: () => serversApi.getApps(id).then(r => r.data.apps),
     refetchInterval: 15000,
   });
+  console.log("appsData",appsData)
 
   const restartMutation = useMutation({
     mutationFn: (appName) => serversApi.restartApp(id, appName),
@@ -231,100 +232,13 @@ export default function ServerDetailPage() {
             </button>
           </div>
 
-          {apps.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500">No PM2 apps found</p>
-              <p className="text-gray-700 text-xs mt-1">Start apps with PM2 on your VPS to see them here</p>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {apps.map(app => (
-                <div
-                  key={app.pmId}
-                  className="bg-gray-800/40 border border-gray-800 rounded-xl p-4 hover:border-gray-700 transition-colors"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <span className={`text-xs px-2 py-0.5 rounded border ${PM2_STATUS_COLORS[app.status] || PM2_STATUS_COLORS.stopped}`}>
-                        {app.status}
-                      </span>
-                      <div>
-                        <p className="font-medium text-white">{app.name}</p>
-                        <p className="text-xs text-gray-500">
-                          PID {app.pid} · {app.mode} · {app.restarts} restarts · up {formatUptime(app.uptime)}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-4">
-                      {/* Resource mini stats */}
-                      <div className="text-right hidden sm:block">
-                        <p className="text-xs text-gray-500">CPU {app.cpu}%</p>
-                        <p className="text-xs text-gray-500">RAM {formatBytes(app.memory)}</p>
-                      </div>
-
-                      {/* Actions */}
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => {
-                            setSelectedApp(app.name);
-                            setActiveTab('logs');
-                          }}
-                          className="btn-ghost text-xs py-1.5 px-3"
-                          title="View logs"
-                        >
-                          Logs
-                        </button>
-                        <button
-                          onClick={() => {
-                            if (confirm(`Restart "${app.name}"?`)) {
-                              restartMutation.mutate(app.name);
-                            }
-                          }}
-                          disabled={restartMutation.isPending}
-                          className="btn-primary text-xs py-1.5 px-3"
-                        >
-                          Restart
-                        </button>
-                        <button
-                          onClick={() => {
-                            if (confirm(`Stop "${app.name}"?`)) {
-                              stopMutation.mutate(app.name);
-                            }
-                          }}
-                          disabled={stopMutation.isPending}
-                          className="btn-danger text-xs py-1.5 px-3"
-                        >
-                          Stop
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       )}
 
       {activeTab === 'logs' && (
         <div className="space-y-4">
           {/* App selector */}
-          {apps.length > 0 && (
-            <div className="card">
-              <label className="label">Filter by App</label>
-              <select
-                className="input max-w-xs"
-                value={selectedApp || ''}
-                onChange={e => setSelectedApp(e.target.value || null)}
-              >
-                <option value="">All apps</option>
-                {apps.map(app => (
-                  <option key={app.pmId} value={app.name}>{app.name}</option>
-                ))}
-              </select>
-            </div>
-          )}
+          
           <LogsViewer serverId={id} appName={selectedApp} />
         </div>
       )}
