@@ -1,0 +1,80 @@
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Environment files (NEVER commit these) ────────────────────────────────────
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+# Keep examples
+!.env.example
+!.env.local.example
+
+# ── Next.js ───────────────────────────────────────────────────────────────────
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ── Backups (agent generates these on VPS, not for git) ───────────────────────
+*.gz
+*.tar
+*.zip
+backups/
+
+# ── PM2 ───────────────────────────────────────────────────────────────────────
+.pm2/
+ecosystem.config.js.bak
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+*.lcov
+
+# ── Build artifacts ───────────────────────────────────────────────────────────
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+.cache/
+.temp/
+.tmp/
+*.pid
+*.seed
+*.pid.lock

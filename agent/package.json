@@ -1,0 +1,22 @@
+{
+  "name": "vps-panel-agent",
+  "version": "1.0.0",
+  "description": "VPS Management Panel - Agent (runs on VPS)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "systeminformation": "^5.22.10"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
