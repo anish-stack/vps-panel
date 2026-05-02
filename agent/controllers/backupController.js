@@ -34,9 +34,9 @@ const triggerBackup = async (req, res) => {
     const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017';
     const args = ['--uri', mongoUri, '--gzip', '--archive', outPath];
 
-    if (database) {
-      args.push('--db', database);
-    }
+    // if (database) {
+    //   args.push('--db', database);
+    // }
 
     await safeExec('mongodump', args);
 
